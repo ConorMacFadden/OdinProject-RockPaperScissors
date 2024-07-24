@@ -35,16 +35,21 @@ function playRound(humanChoice, computerChoice) {
     
         if (winner == 'human') { 
             humanScore++; 
-            console.log(`You win! ${humanChoice} beats ${computerChoice}.`) 
+            // console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+            resultDiv.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
         }
         else if (winner == 'computer') { 
             computerScore++;
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`) 
+            // console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+            resultDiv.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
         }
-        else { console.log(`Draw, you both picked ${humanChoice}.`)}
+        else { 
+            // console.log(`Draw, you both picked ${humanChoice}.`)
+            resultDiv.textContent = `Draw, you both picked ${humanChoice}.`;
+        }
 }
     
-
+const resultDiv = document.querySelector(".result");
 
 function playGame() {
 
@@ -55,6 +60,8 @@ function playGame() {
     }
     
 }
+
+
 
 const buttonContainer = document.querySelector(".button-row");
 buttonContainer.addEventListener("click", (e) => {
