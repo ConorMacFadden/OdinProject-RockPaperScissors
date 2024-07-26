@@ -1,4 +1,13 @@
 body {
     background-color: darkslategray;
+    min-height: 100vh;
     margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.main {
+    flex-grow: 1;
+    text-align: center;
 }
