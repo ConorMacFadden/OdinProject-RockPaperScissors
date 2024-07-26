@@ -26,30 +26,43 @@ let computerScore = 0;
 let round = 1;
 
 function playRound(humanChoice, computerChoice) {
+
+        round++;
+        if (round > 5) { resetGame();}
+
         if (humanChoice == undefined) {return;}
         let winner = 'computer'; // default to computer, but change if the player has won or it's a draw.
         if (humanChoice == computerChoice) { winner = 'draw'} // Same choice so draw.
         if (humanChoice == 'rock' && computerChoice == 'scissor') { winner = 'human'; }
         if (humanChoice == 'paper' && computerChoice == 'rock') { winner = 'human'; }
         if (humanChoice == 'scissor' && computerChoice == 'paper') { winner = 'human'; }
-    
+
         if (winner == 'human') { 
             humanScore++; 
             // console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
-            resultDiv.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
+            addResult(`Round: ${round} | You win! ${humanChoice} beats ${computerChoice}.`);
         }
         else if (winner == 'computer') { 
             computerScore++;
             // console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
-            resultDiv.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
+            addResult(`Round: ${round} | You lose! ${computerChoice} beats ${humanChoice}.`);
         }
         else { 
             // console.log(`Draw, you both picked ${humanChoice}.`)
-            resultDiv.textContent = `Draw, you both picked ${humanChoice}.`;
+            addResult(`Round: ${round} | Draw, you both picked ${humanChoice}.`);
         }
+    
+        updateScore();
+        roundDiv.textContent = `Round: ${round}`
+
 }
     
 const resultDiv = document.querySelector(".result");
+const scoreDiv = document.querySelector(".score");
+updateScore();
+
+const roundDiv = document.querySelector(".round");
+roundDiv.textContent = `Round: ${round}`
 
 function playGame() {
 
@@ -77,3 +90,25 @@ buttonContainer.addEventListener("click", (e) => {
             break;
     }
 })
+
+function clearResults() {
+    while (resultDiv.firstChild) { resultDiv.removeChild(resultDiv.lastChild);}
+}
+
+function addResult(resultText) {
+    let newResult = document.createElement("p");
+    newResult.textContent = resultText;
+    resultDiv.appendChild(newResult);
+}
+
+function resetGame() {
+    clearResults();
+    round = 1;
+    humanScore = 0;
+    computerScore = 0;
+    updateScore();
+}
+
+function updateScore() {
+    scoreDiv.textContent=`Human: ${humanScore} | Computer: ${computerScore}`
+}

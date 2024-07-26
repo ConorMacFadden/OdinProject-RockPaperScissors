@@ -11,3 +11,7 @@ body {
     flex-grow: 1;
     text-align: center;
 }
+
+.round {
+    font-size: 36px;
+}
